@@ -39,9 +39,10 @@ class CharacterEntry(CommandBase):
     _latex_name = 'charentry'
 
 class Printer:
-    def __init__(self, fn, characters:list[Character]):
+    def __init__(self, fn, characters:list[Character], doc_class='murdermystery'):
         self.fn = fn
         self.characters = characters
+        self.doc_class = doc_class
     
     def _add_entry(self, c:Character, events:list[Event], act:int):
         pubs = [e for e in events if not e.private]
@@ -55,8 +56,9 @@ class Printer:
         
         self.doc.append(CharacterEntry( arguments=(c.name.capitalize(), act, c.logo_fn, NoEscape(items))))
                 
-    def make_document(self, act_new_page=False):          
-        self.doc = Document(self.fn, documentclass='murdermystery')
+    def make_document(self, act_new_page=False):
+        self.doc = Document(self.fn, documentclass=self.doc_class)
+            
         
         # maybe somebody's murder mystery has different # of acts
         actnums = sorted(set(e.act for character in self.characters for e in character.events))
