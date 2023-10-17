@@ -4,7 +4,7 @@ This program creates printable documents, intended to be used in Murder Mystery 
 
 After the documentation is printed out ![page](readme/page.jpg) it is then cut ![cutlines](readme/cutlines.jpg) and folded ![folded](readme/folded.jpg) to hide a character's information from other players.  These folded cutouts are then handed to players at the beginning of each act.
 
-See [example game]() in the skeleton template repository for a more thorough use case example.
+See [example game](https://github.com/williamweatherholtz/murder-mystery-skeleton/blob/main/murder_mystery_example.py) in the skeleton template repository for a more thorough use case example.
 
 ## Background
 
