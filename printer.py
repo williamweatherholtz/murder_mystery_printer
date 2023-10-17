@@ -1,14 +1,31 @@
 import os
 
-from plot import Character, Event
-
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from pylatex import Document, Command, UnsafeCommand
 from pylatex.basic import NewPage
 from pylatex.package import Package
 from pylatex.base_classes import CommandBase, Arguments
 from pylatex.utils import italic, NoEscape, bold
+   
+
+@dataclass
+class Event:
+    desc: str
+    act: int = None
+    private: bool = False
+
+
+@dataclass
+class Character:
+    name: str
+    logo_fn: str
+    events: list[Event] = field(default_factory=list)
+    player: str = None
+    
+    def __add__(self, e: Event):
+        self.events.append(e)
+        return self
 
 # these classes form an interface to call custom commands via pylatex.  
 # their implementations are found in the latex murdermystery.cls file
