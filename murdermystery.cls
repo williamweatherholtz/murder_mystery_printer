@@ -6,7 +6,7 @@
 \newcommand{\charheading}[2]{\textbf{Act #2}: \textit{#1}}
 
 \newcommand{\cuthere}{\hbox to \textwidth{\leaders\hbox to 25pt{\hss . \hss}\hfil}}
-\newcommand{\privateitem}[1]{\\ \includegraphics[height=0.4in]{symbols/private} & $\bullet$ #1 \\}
+\newcommand{\privateitem}[1]{\\ \IfFileExists{symbols/private}{\includegraphics[height=0.4in]{symbols/private}}{\includegraphics[height=0.4in]{murder_mystery_printer/symbols/private}} & $\bullet$ #1 \\}
 \newcommand{\publicitem}[1]{\\ & $\bullet$  #1 \\ }
 
 % character name, act, logo file, infos
