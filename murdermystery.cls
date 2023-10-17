@@ -10,7 +10,7 @@
 \newcommand{\publicitem}[1]{\\ & $\bullet$  #1 \\ }
 
 % character name, act, logo file, infos
-\newcommand{\charact}[4]{
+\newcommand{\charentry}[4]{
 \begin{tabular}[t]{m{2in} m{5in}}
 \includegraphics[height=1in]{#3}\newline\charheading{#1}{#2}& 
 \begin{tabular}{m{1in} m{3.5in}}
