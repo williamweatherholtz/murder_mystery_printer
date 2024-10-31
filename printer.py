@@ -46,7 +46,7 @@ class Printer:
         self.characters = characters
         self.doc_class = doc_class
     
-    def analyze(self, fn='analysis.html') -> pd.DataFrame:
+    def analyze(self, fn='analysis.html', clues=True) -> pd.DataFrame:
         acts = set()
         for c in self.characters:
             for e in c.events:
@@ -61,10 +61,17 @@ class Printer:
                 #data['Name'].append(c.name)
                 if c.name not in index:
                     index.append(c.name)
-                data[f'Act {act}'].append(len([e for e in c.events if e.act == act]))
+                
+                # maybe the amount of characters per clue is most meaningful, or maybe it's the # of clues
+                if clues:
+                    data[f'Act {act}'].append(len([e for e in c.events if e.act == act]))
+                else:
+                    data[f'Act {act}'].append(sum([len(e.desc) for e in c.events if e.act == act]))
+                    
                 
         df = pd.DataFrame(data, index=index)
-        df = df.style.background_gradient(cmap="RdYlGn", vmin=0, vmax=4)
+        #if 
+        df = df.style.background_gradient(cmap="RdYlGn", vmin=0)#, vmax=4)
         
         df.to_html(fn)
         
