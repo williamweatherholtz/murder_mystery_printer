@@ -2,6 +2,8 @@ import os
 
 from dataclasses import dataclass, field
 
+import pandas as pd
+
 from pylatex import Document, Command, UnsafeCommand
 from pylatex.basic import NewPage
 from pylatex.package import Package
@@ -43,6 +45,30 @@ class Printer:
         self.fn = fn
         self.characters = characters
         self.doc_class = doc_class
+    
+    def analyze(self, fn='analysis.html') -> pd.DataFrame:
+        acts = set()
+        for c in self.characters:
+            for e in c.events:
+                acts.add(e.act)
+        
+        data = {}
+        index = []
+        for act in acts:
+            data[f'Act {act}'] = []
+            #data['Name'] = []
+            for c in self.characters:
+                #data['Name'].append(c.name)
+                if c.name not in index:
+                    index.append(c.name)
+                data[f'Act {act}'].append(len([e for e in c.events if e.act == act]))
+                
+        df = pd.DataFrame(data, index=index)
+        df = df.style.background_gradient(cmap="RdYlGn", vmin=0, vmax=4)
+        
+        df.to_html(fn)
+        
+        return df
     
     def _add_entry(self, c:Character, events:list[Event], act:int):
         pubs = [e for e in events if not e.private]
