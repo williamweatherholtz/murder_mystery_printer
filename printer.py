@@ -108,7 +108,7 @@ class Printer:
                 self._add_entry(c, act_events, act)
             if act_new_page:
                 self.doc.append(NewPage())            
-        self.doc.generate_pdf(clean=True, clean_tex=True)
+        self.doc.generate_pdf(clean=True, clean_tex=True, compiler='pdfLaTeX')
         #self.doc.generate_tex()
         
 
