@@ -71,7 +71,10 @@ class Printer:
                 
         df = pd.DataFrame(data, index=index)
         #if 
-        df = df.style.background_gradient(cmap="RdYlGn", vmin=0)#, vmax=4)
+        if clues:
+            df = df.style.background_gradient(cmap="RdYlGn", vmin=0, vmax=5)#, vmax=4)
+        else:
+            df = df.style.background_gradient(cmap="RdYlGn", vmin=0)#, vmax=4)
         
         df.to_html(fn)
         
